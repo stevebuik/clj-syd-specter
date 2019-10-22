@@ -156,14 +156,14 @@
        (transform [ALL :speaker] id-lookup)))
 
 ; recursive paths
+; https://github.com/redplanetlabs/specter/wiki/Using-Specter-Recursively
+; (also supports zippers)
 
 (def NODES                                                  ; visit all nodes in a tree, one at a time
   (recursive-path [] p
                   (if-path map?
                            ; continue-then-stay does post-order/depth first traversal
-                           ; depth first used to ensure child nodes are generated first (see restore comment in generate-full-vnode)
-                           (continue-then-stay [:children ALL]
-                                               p))))
+                           (continue-then-stay [:children ALL] p))))
 
 (def tree {:id       "root"
            :children [{:id "first child"}
